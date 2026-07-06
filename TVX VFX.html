@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>TVK VFX | Professional Video Editor</title>
+
+<meta name="description" content="Professional Video Editor | Motion Graphics | VFX Artist | Sri Sakthivel">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+
+background:#000;
+color:#fff;
+overflow-x:hidden;
+
+}
+
+::-webkit-scrollbar{
+width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+background:#ff0000;
+border-radius:50px;
+}
+
+::-webkit-scrollbar-track{
+background:#111;
+}
+
+a{
+
+text-decoration:none;
+
+}
+
+section{
+
+padding:110px 8%;
+
+}
+
+.glass{
+
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,.1);
+
+}
+
+.redGlow{
+
+box-shadow:
+0 0 25px red,
+0 0 60px rgba(255,0,0,.5);
+
+}
+
+.btn{
+
+padding:16px 38px;
+
+border-radius:50px;
+
+background:#ff0000;
+
+color:white;
+
+font-weight:700;
+
+transition:.4s;
+
+display:inline-block;
+
+}
+
+.btn:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 0 40px red;
+
+}
+
+.heroTitle{
+
+font-size:72px;
+
+font-weight:800;
+
+line-height:1.1;
+
+}
+
+.heroSub{
+
+font-size:22px;
+
+opacity:.8;
+
+margin-top:15px;
+
+}
+
+#particles{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+z-index:-2;
+
+}
+
+#gradient{
+
+position:fixed;
+
+width:100%;
+
+height:100%;
+
+background:
+radial-gradient(circle at top,#420000 0%,#000 60%);
+
+z-index:-3;
+
+}
+
+nav{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+padding:20px 8%;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+z-index:999;
+
+background:rgba(0,0,0,.4);
+
+backdrop-filter:blur(18px);
+
+border-bottom:1px solid rgba(255,255,255,.05);
+
+}
+
+nav img{
+
+height:55px;
+
+}
+
+nav ul{
+
+display:flex;
+
+gap:35px;
+
+list-style:none;
+
+}
+
+nav ul li a{
+
+color:white;
+
+transition:.4s;
+
+}
+
+nav ul li a:hover{
+
+color:red;
+
+}
+
+#loader{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100vh;
+
+background:#000;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+flex-direction:column;
+
+z-index:5000;
+
+}
+
+#loader img{
+
+width:180px;
+
+animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(.9);
+
+filter:drop-shadow(0 0 10px red);
+
+}
+
+50%{
+
+transform:scale(1);
+
+filter:drop-shadow(0 0 35px red);
+
+}
+
+100%{
+
+transform:scale(.9);
+
+}
+
+}
+
+#intro{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:black;
+
+display:none;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:4500;
+
+}
+
+#intro video{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+}
+
+#skip{
+
+position:absolute;
+
+right:40px;
+
+top:40px;
+
+background:red;
+
+padding:14px 28px;
+
+border:none;
+
+color:white;
+
+font-weight:bold;
+
+cursor:pointer;
+
+border-radius:40px;
+
+}
+
+.hero{
+
+height:100vh;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+gap:60px;
+
+}
+
+.left{
+
+max-width:650px;
+
+}
+
+.tag{
+
+display:inline-block;
+
+padding:8px 18px;
+
+border-radius:40px;
+
+background:#1a1a1a;
+
+border:1px solid rgba(255,255,255,.08);
+
+margin-bottom:25px;
+
+color:#ff4444;
+
+}
+
+.heroButtons{
+
+margin-top:35px;
+
+display:flex;
+
+gap:20px;
+
+flex-wrap:wrap;
+
+}
+
+.outline{
+
+background:transparent;
+
+border:2px solid red;
+
+}
+
+.outline:hover{
+
+background:red;
+
+}
+
+.heroImage{
+
+width:500px;
+
+height:500px;
+
+border-radius:40px;
+
+background:linear-gradient(145deg,#111,#222);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+.heroImage img{
+
+width:75%;
+
+filter:drop-shadow(0 0 40px red);
+
+}
+
+@media(max-width:900px){
+
+.hero{
+
+flex-direction:column;
+
+text-align:center;
+
+justify-content:center;
+
+}
+
+.heroTitle{
+
+font-size:46px;
+
+}
+
+.heroImage{
+
+width:320px;
+
+height:320px;
+
+margin-top:40px;
+
+}
+
+nav ul{
+
+display:none;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="gradient"></div>
+
+<canvas id="particles"></canvas>
+
+<div id="loader">
+
+<img src="logo.png">
+
+<h2 style="margin-top:30px;color:#aaa;">Loading Experience...</h2>
+
+</div>
+
+<div id="intro">
+
+<button id="skip">Skip Intro</button>
+
+<video id="introVideo" autoplay playsinline>
+
+<source src="intro.mp4" type="video/mp4">
+
+</video>
+
+</div>
+
+<nav>
+
+<img src="logo.png">
+
+<ul>
+
+<li><a href="#">Home</a></li>
+
+<li><a href="#showreel">Showreel</a></li>
+
+<li><a href="#works">Works</a></li>
+
+<li><a href="#about">About</a></li>
+
+<li><a href="#services">Services</a></li>
+
+<li><a href="#contact">Contact</a></li>
+
+</ul>
+
+</nav>
+
+<section class="hero">
+
+<div class="left">
+
+<div class="tag">
+
+TVK VFX • PREMIUM PORTFOLIO
+
+</div>
+
+<h1 class="heroTitle">
+
+SRI<br>
+
+SAKTHIVEL
+
+</h1>
+
+<p class="heroSub">
+
+Professional Video Editor
+
+<br>
+
+Motion Graphics Artist
+
+<br>
+
+VFX Artist
+
+</p>
+
+<p style="margin-top:25px;font-size:18px;color:#bbb;max-width:520px;line-height:1.8;">
+
+Turning Ideas Into Impactful Visual Stories.
+
+Creating cinematic edits, VFX,
+motion graphics and premium commercial content.
+
+</p>
+
+<div class="heroButtons">
+
+<a href="#showreel" class="btn">
+
+Watch Showreel
+
+</a>
+
+<a href="#contact" class="btn outline">
+
+Hire Me
+
+</a>
+
+</div>
+
+</div>
+
+<div class="heroImage glass">
+
+<img src="logo.png">
+
+</div>
+
+</section>
+<!-- ========================= -->
+<!-- SHOWREEL SECTION -->
+<!-- ========================= -->
+
+<section id="showreel">
+
+<div style="text-align:center;margin-bottom:70px;">
+
+<h2 style="font-size:48px;font-weight:800;">
+
+SHOWREEL
+
+</h2>
+
+<p style="color:#999;margin-top:15px;font-size:18px;">
+
+A collection of cinematic edits, VFX, motion graphics and premium visual storytelling.
+
+</p>
+
+</div>
+
+<div class="glass redGlow"
+
+style="border-radius:30px;
+overflow:hidden;
+max-width:1200px;
+margin:auto;">
+
+<video
+id="showreelVideo"
+controls
+playsinline
+muted
+style="width:100%;
+display:block;">
+
+<source src="showreel.mp4" type="video/mp4">
+
+</video>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- FEATURED WORKS -->
+<!-- ========================= -->
+
+<section id="works">
+
+<div style="text-align:center;">
+
+<h2 style="font-size:48px;font-weight:800;">
+
+FEATURED WORKS
+
+</h2>
+
+<p style="margin-top:15px;color:#888;">
+
+Selected premium projects.
+
+</p>
+
+</div>
+
+<div
+style="
+margin-top:70px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+gap:35px;
+">
+
+<!-- PROJECT 1 -->
+
+<div class="glass workCard">
+
+<div class="thumb">
+
+<video muted loop>
+
+<source src="project1.mp4">
+
+</video>
+
+</div>
+
+<div class="content">
+
+<span class="category">
+
+SPORTS EDIT
+
+</span>
+
+<h3>
+
+Dynamic Sports Reel
+
+</h3>
+
+<p>
+
+High-energy sports edit with cinematic transitions,
+motion graphics and sound design.
+
+</p>
+
+<a href="project1.mp4" class="btn">
+
+Watch
+
+</a>
+
+</div>
+
+</div>
+
+<!-- PROJECT 2 -->
+
+<div class="glass workCard">
+
+<div class="thumb">
+
+<video muted loop>
+
+<source src="project2.mp4">
+
+</video>
+
+</div>
+
+<div class="content">
+
+<span class="category">
+
+COMMERCIAL
+
+</span>
+
+<h3>
+
+Brand Advertisement
+
+</h3>
+
+<p>
+
+Luxury commercial edit using advanced color grading
+and premium visual effects.
+
+</p>
+
+<a href="project2.mp4" class="btn">
+
+Watch
+
+</a>
+
+</div>
+
+</div>
+
+<!-- PROJECT 3 -->
+
+<div class="glass workCard">
+
+<div class="thumb">
+
+<video muted loop>
+
+<source src="project3.mp4">
+
+</video>
+
+</div>
+
+<div class="content">
+
+<span class="category">
+
+VFX
+
+</span>
+
+<h3>
+
+Cinematic Visual Effects
+
+</h3>
+
+<p>
+
+Professional compositing,
+motion graphics and cinematic finishing.
+
+</p>
+
+<a href="project3.mp4" class="btn">
+
+Watch
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.workCard{
+
+overflow:hidden;
+
+border-radius:28px;
+
+transition:.45s;
+
+}
+
+.workCard:hover{
+
+transform:translateY(-14px);
+
+box-shadow:0 0 45px rgba(255,0,0,.45);
+
+}
+
+.thumb{
+
+height:240px;
+
+overflow:hidden;
+
+}
+
+.thumb video{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+transition:.5s;
+
+}
+
+.workCard:hover video{
+
+transform:scale(1.08);
+
+}
+
+.content{
+
+padding:28px;
+
+}
+
+.category{
+
+display:inline-block;
+
+padding:8px 18px;
+
+background:#111;
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:30px;
+
+color:#ff4d4d;
+
+font-size:13px;
+
+margin-bottom:18px;
+
+}
+
+.content h3{
+
+font-size:28px;
+
+margin-bottom:12px;
+
+}
+
+.content p{
+
+color:#aaa;
+
+line-height:1.8;
+
+margin-bottom:25px;
+
+}
+
+</style>
+
+<script>
+
+document.querySelectorAll(".workCard").forEach(card=>{
+
+const video=card.querySelector("video");
+
+card.addEventListener("mouseenter",()=>video.play());
+
+card.addEventListener("mouseleave",()=>{
+
+video.pause();
+
+video.currentTime=0;
+
+});
+
+});
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+showreelVideo.play();
+
+}else{
+
+showreelVideo.pause();
+
+}
+
+});
+
+},{threshold:.6});
+
+observer.observe(document.getElementById("showreelVideo"));
+
+gsap.from("#showreel h2",{
+
+opacity:0,
+
+y:80,
+
+duration:1
+
+});
+
+gsap.from(".workCard",{
+
+opacity:0,
+
+y:80,
+
+duration:1,
+
+stagger:.2
+
+});
+
+</script>
+<!-- ========================= -->
+<!-- ABOUT -->
+<!-- ========================= -->
+
+<section id="about">
+
+<div class="sectionTitle">
+<h2>ABOUT ME</h2>
+<p>Passionate editor crafting cinematic experiences.</p>
+</div>
+
+<div class="aboutGrid">
+
+<div class="glass aboutCard">
+
+<h3>SRI SAKTHIVEL</h3>
+
+<p>
+
+Creative Video Editor with over 2 years of experience creating
+premium visual stories for brands, creators, sports edits,
+commercials and social media.
+
+I specialize in cinematic editing,
+motion graphics,
+visual effects,
+color grading,
+storytelling and high-end post production.
+
+</p>
+
+<a class="btn" href="#contact">
+
+Hire Me
+
+</a>
+
+</div>
+
+<div class="glass statsCard">
+
+<div class="stat">
+
+<h1 class="counter" data-count="2">0</h1>
+
+<span>Years Experience</span>
+
+</div>
+
+<div class="stat">
+
+<h1 class="counter" data-count="100">0</h1>
+
+<span>Projects</span>
+
+</div>
+
+<div class="stat">
+
+<h1 class="counter" data-count="50">0</h1>
+
+<span>Happy Clients</span>
+
+</div>
+
+<div class="stat">
+
+<h1 class="counter" data-count="8">0</h1>
+
+<span>Software Skills</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- SKILLS -->
+<!-- ========================= -->
+
+<section id="skills">
+
+<div class="sectionTitle">
+
+<h2>SOFTWARE SKILLS</h2>
+
+<p>Industry-standard creative tools.</p>
+
+</div>
+
+<div class="skillGrid">
+
+<div class="glass skillCard">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg">
+<h3>Adobe Photoshop</h3>
+</div>
+
+<div class="glass skillCard">
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg">
+<h3>After Effects</h3>
+</div>
+
+<div class="glass skillCard">
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg">
+<h3>Premiere Pro</h3>
+</div>
+
+<div class="glass skillCard">
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/DaVinci_Resolve_Studio.png">
+<h3>DaVinci Resolve</h3>
+</div>
+
+<div class="glass skillCard">
+<h3>CapCut</h3>
+</div>
+
+<div class="glass skillCard">
+<h3>VN Editor</h3>
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- SERVICES -->
+<!-- ========================= -->
+
+<section id="services">
+
+<div class="sectionTitle">
+
+<h2>MY SERVICES</h2>
+
+<p>Premium editing solutions.</p>
+
+</div>
+
+<div class="serviceGrid">
+
+<div class="glass serviceCard">
+<h3>🎬 Video Editing</h3>
+<p>Professional edits with cinematic pacing.</p>
+</div>
+
+<div class="glass serviceCard">
+<h3>✨ Motion Graphics</h3>
+<p>Modern motion graphics and typography.</p>
+</div>
+
+<div class="glass serviceCard">
+<h3>🔥 Visual Effects</h3>
+<p>Hollywood-style compositing and VFX.</p>
+</div>
+
+<div class="glass serviceCard">
+<h3>🎨 Color Grading</h3>
+<p>Premium cinematic color correction.</p>
+</div>
+
+<div class="glass serviceCard">
+<h3>📱 Reels & Shorts</h3>
+<p>Instagram, YouTube Shorts and TikTok edits.</p>
+</div>
+
+<div class="glass serviceCard">
+<h3>🏆 Sports Editing</h3>
+<p>High-energy sports highlight edits.</p>
+</div>
+
+<div class="glass serviceCard">
+<h3>📰 Political Videos</h3>
+<p>Modern political campaign and news edits.</p>
+</div>
+
+<div class="glass serviceCard">
+<h3>🏢 Commercial Ads</h3>
+<p>Luxury promotional advertisements.</p>
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.sectionTitle{
+
+text-align:center;
+
+margin-bottom:70px;
+
+}
+
+.sectionTitle h2{
+
+font-size:48px;
+
+font-weight:800;
+
+}
+
+.sectionTitle p{
+
+margin-top:15px;
+
+color:#888;
+
+}
+
+.aboutGrid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+
+gap:35px;
+
+}
+
+.aboutCard,
+.statsCard{
+
+padding:40px;
+
+border-radius:25px;
+
+}
+
+.aboutCard p{
+
+margin:25px 0;
+
+line-height:1.9;
+
+color:#bbb;
+
+}
+
+.statsCard{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:25px;
+
+}
+
+.stat{
+
+text-align:center;
+
+}
+
+.stat h1{
+
+font-size:55px;
+
+color:#ff3333;
+
+}
+
+.skillGrid,
+.serviceGrid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+gap:30px;
+
+}
+
+.skillCard,
+.serviceCard{
+
+padding:35px;
+
+border-radius:25px;
+
+text-align:center;
+
+transition:.4s;
+
+}
+
+.skillCard:hover,
+.serviceCard:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 0 30px rgba(255,0,0,.45);
+
+}
+
+.skillCard img{
+
+width:70px;
+
+height:70px;
+
+margin-bottom:20px;
+
+}
+
+</style>
+
+<script>
+
+document.querySelectorAll(".counter").forEach(counter=>{
+
+let target=+counter.dataset.count;
+
+let count=0;
+
+let speed=target/60;
+
+let interval=setInterval(()=>{
+
+count+=speed;
+
+if(count>=target){
+
+count=target;
+
+clearInterval(interval);
+
+}
+
+counter.innerText=Math.floor(count)+"+";
+
+},20);
+
+});
+
+gsap.from(".skillCard",{
+
+opacity:0,
+
+y:80,
+
+stagger:.15,
+
+duration:1
+
+});
+
+gsap.from(".serviceCard",{
+
+opacity:0,
+
+scale:.9,
+
+stagger:.12,
+
+duration:1
+
+});
+
+</script>
+<!-- ========================= -->
+<!-- CONTACT -->
+<!-- ========================= -->
+
+<section id="contact">
+
+<div class="sectionTitle">
+
+<h2>LET'S CREATE SOMETHING AMAZING</h2>
+
+<p>
+
+Ready to bring your vision to life?
+
+</p>
+
+</div>
+
+<div class="contactGrid">
+
+<div class="glass contactCard">
+
+<h3>CONTACT DETAILS</h3>
+
+<div class="contactItem">
+
+<h4>Email</h4>
+
+<a href="mailto:srisakthivelselvakumar27@gmail.com">
+
+srisakthivelselvakumar27@gmail.com
+
+</a>
+
+</div>
+
+<div class="contactItem">
+
+<h4>TVK VFX</h4>
+
+<a href="https://instagram.com/tvk._.vfx">
+
+@tvk._.vfx
+
+</a>
+
+</div>
+
+<div class="contactItem">
+
+<h4>Personal</h4>
+
+<a href="https://instagram.com/joyboy.sakthi">
+
+@joyboy.sakthi
+
+</a>
+
+</div>
+
+<div class="heroButtons">
+
+<a class="btn"
+
+href="mailto:srisakthivelselvakumar27@gmail.com">
+
+Hire Me
+
+</a>
+
+<a class="btn outline"
+
+target="_blank"
+
+href="https://instagram.com/tvk._.vfx">
+
+Instagram
+
+</a>
+
+</div>
+
+</div>
+
+<div class="glass contactCard">
+
+<h3>Send a Message</h3>
+
+<form id="contactForm">
+
+<input
+
+type="text"
+
+placeholder="Your Name"
+
+required>
+
+<input
+
+type="email"
+
+placeholder="Email"
+
+required>
+
+<input
+
+type="text"
+
+placeholder="Project Type">
+
+<textarea
+
+placeholder="Tell me about your project..."
+
+rows="6"
+
+required>
+
+</textarea>
+
+<button
+
+type="submit"
+
+class="btn">
+
+Send Message
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
+<footer>
+
+<img
+
+src="logo.png"
+
+class="footerLogo">
+
+<h2>
+
+TVK VFX
+
+</h2>
+
+<p>
+
+Professional Video Editing • Motion Graphics • VFX
+
+</p>
+
+<div class="footerLinks">
+
+<a href="#">
+
+Home
+
+</a>
+
+<a href="#showreel">
+
+Showreel
+
+</a>
+
+<a href="#works">
+
+Projects
+
+</a>
+
+<a href="#services">
+
+Services
+
+</a>
+
+<a href="#contact">
+
+Contact
+
+</a>
+
+</div>
+
+<p class="copyright">
+
+© 2026 TVK VFX
+
+Designed & Developed by
+
+Sri Sakthivel
+
+</p>
+
+</footer>
+
+<style>
+
+.contactGrid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+
+gap:35px;
+
+}
+
+.contactCard{
+
+padding:40px;
+
+border-radius:30px;
+
+}
+
+.contactCard h3{
+
+margin-bottom:30px;
+
+font-size:30px;
+
+}
+
+.contactItem{
+
+margin-bottom:25px;
+
+}
+
+.contactItem h4{
+
+color:#ff4444;
+
+margin-bottom:8px;
+
+}
+
+.contactItem a{
+
+color:white;
+
+}
+
+input,
+
+textarea{
+
+width:100%;
+
+padding:18px;
+
+margin-bottom:18px;
+
+background:#111;
+
+border:1px solid rgba(255,255,255,.08);
+
+color:white;
+
+border-radius:14px;
+
+outline:none;
+
+}
+
+textarea{
+
+resize:none;
+
+}
+
+footer{
+
+padding:80px 8%;
+
+text-align:center;
+
+background:#050505;
+
+border-top:1px solid rgba(255,255,255,.05);
+
+}
+
+.footerLogo{
+
+width:110px;
+
+margin-bottom:25px;
+
+filter:drop-shadow(0 0 20px red);
+
+}
+
+.footerLinks{
+
+margin:35px 0;
+
+display:flex;
+
+justify-content:center;
+
+gap:30px;
+
+flex-wrap:wrap;
+
+}
+
+.footerLinks a{
+
+color:#999;
+
+transition:.4s;
+
+}
+
+.footerLinks a:hover{
+
+color:#ff3333;
+
+}
+
+.copyright{
+
+margin-top:35px;
+
+color:#666;
+
+font-size:14px;
+
+}
+
+</style>
+
+<script>
+
+document
+
+.getElementById("contactForm")
+
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+alert("Thank you! Your message has been received.");
+
+this.reset();
+
+});
+
+</script>
+<script>
+
+/* ===========================
+   INTRO LOADER SYSTEM
+=========================== */
+
+const loader = document.getElementById("loader");
+const intro = document.getElementById("intro");
+const introVideo = document.getElementById("introVideo");
+const skipBtn = document.getElementById("skip");
+
+const today = new Date().toDateString();
+const lastVisit = localStorage.getItem("tvkIntroDate");
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+
+        loader.style.opacity = "0";
+
+        setTimeout(() => {
+
+            loader.style.display = "none";
+
+            if (lastVisit !== today) {
+
+                intro.style.display = "flex";
+
+                introVideo.play();
+
+                localStorage.setItem("tvkIntroDate", today);
+
+            } else {
+
+                gsap.from(".hero", {
+
+                    opacity: 0,
+                    y: 80,
+                    duration: 1.2,
+                    ease: "power3.out"
+
+                });
+
+            }
+
+        },700);
+
+    },1500);
+
+});
+
+/* ===========================
+   SKIP INTRO
+=========================== */
+
+function closeIntro(){
+
+intro.style.opacity="0";
+
+setTimeout(()=>{
+
+intro.style.display="none";
+
+gsap.from(".hero",{
+
+opacity:0,
+y:80,
+duration:1.2
+
+});
+
+},600);
+
+}
+
+skipBtn.onclick=closeIntro;
+
+introVideo.onended=closeIntro;
+
+/* ===========================
+   NAVBAR EFFECT
+=========================== */
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>100){
+
+document.querySelector("nav").style.background="rgba(0,0,0,.85)";
+
+}else{
+
+document.querySelector("nav").style.background="rgba(0,0,0,.4)";
+
+}
+
+});
+
+/* ===========================
+   HERO ANIMATION
+=========================== */
+
+gsap.from(".tag",{
+
+opacity:0,
+y:-30,
+duration:1
+
+});
+
+gsap.from(".heroTitle",{
+
+opacity:0,
+x:-80,
+duration:1.2
+
+});
+
+gsap.from(".heroSub",{
+
+opacity:0,
+x:-60,
+delay:.4,
+duration:1
+
+});
+
+gsap.from(".heroButtons",{
+
+opacity:0,
+y:60,
+delay:.7,
+duration:1
+
+});
+
+gsap.from(".heroImage",{
+
+opacity:0,
+scale:.8,
+duration:1.5
+
+});
+
+/* ===========================
+   MAGNETIC BUTTONS
+=========================== */
+
+document.querySelectorAll(".btn").forEach(btn=>{
+
+btn.addEventListener("mousemove",(e)=>{
+
+const rect=btn.getBoundingClientRect();
+
+const x=e.clientX-rect.left-rect.width/2;
+
+const y=e.clientY-rect.top-rect.height/2;
+
+btn.style.transform=`translate(${x*.15}px,${y*.15}px)`;
+
+});
+
+btn.addEventListener("mouseleave",()=>{
+
+btn.style.transform="translate(0,0)";
+
+});
+
+});
+
+</script>
+<script>
+
+/* ===========================
+   PARTICLE BACKGROUND
+=========================== */
+
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<120;i++){
+
+particles.push({
+
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2+1,
+dx:(Math.random()-.5)*0.4,
+dy:(Math.random()-.5)*0.4
+
+});
+
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+particles.forEach(p=>{
+
+ctx.beginPath();
+
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+
+ctx.fillStyle="rgba(255,0,0,.8)";
+
+ctx.fill();
+
+p.x+=p.dx;
+
+p.y+=p.dy;
+
+if(p.x<0||p.x>canvas.width)p.dx*=-1;
+if(p.y<0||p.y>canvas.height)p.dy*=-1;
+
+});
+
+requestAnimationFrame(animate);
+
+}
+
+animate();
+
+window.addEventListener("resize",()=>{
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+});
+
+/* ===========================
+   SCROLL REVEAL
+=========================== */
+
+const reveal=document.querySelectorAll("section");
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+gsap.from(entry.target,{
+
+opacity:0,
+y:80,
+duration:1,
+ease:"power3.out"
+
+});
+
+}
+
+});
+
+},{threshold:.2});
+
+reveal.forEach(sec=>observer.observe(sec));
+
+/* ===========================
+   SMOOTH ACTIVE NAV
+=========================== */
+
+document.querySelectorAll('nav a').forEach(link=>{
+
+link.addEventListener('click',function(e){
+
+e.preventDefault();
+
+const target=document.querySelector(this.getAttribute('href'));
+
+if(target){
+
+target.scrollIntoView({
+
+behavior:'smooth'
+
+});
+
+}
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
